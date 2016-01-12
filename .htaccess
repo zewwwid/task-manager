@@ -1,0 +1,12 @@
+AddDefaultCharset utf-8
+php_value	default_charset utf-8
+AddCharset utf-8 .php .html .js
+AddDefaultCharset utf-8
+
+<IfModule mod_rewrite.c>
+    Options +FollowSymlinks
+    RewriteEngine On
+    RewriteRule ^bundles/(.*)$ web/bundles/$1  [QSA,L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ web/app_dev.php [QSA,L]
+</IfModule>
