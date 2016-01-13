@@ -10,7 +10,11 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Документ.
  * 
  * @ORM\Entity
- * @ORM\Table(name="documents")
+ * @ORM\Table(name="documents",
+ *      indexes={
+ *          @ORM\Index(name="documents_filename_idx", columns={"filename"})
+ *      }
+ * )
  */
 class Document {
 

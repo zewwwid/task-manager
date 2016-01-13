@@ -10,7 +10,14 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Клиент.
  * 
  * @ORM\Entity
- * @ORM\Table(name="clients")
+ * @ORM\Table(name="clients",
+ *      indexes={
+ *          @ORM\Index(name="clients_fullname_idx", columns={"fullname"}),
+ *          @ORM\Index(name="clients_email_idx", columns={"email"}),
+ *          @ORM\Index(name="clients_phone_idx", columns={"phone"}),
+ *          @ORM\Index(name="clients_status_idx", columns={"status"})
+ *      }
+ * )
  */
 class Client {
 
@@ -32,7 +39,7 @@ class Client {
      *      nullable=false
      * )
      */
-    protected $fullname;   
+    protected $fullname;
 
     /**
      * Email.

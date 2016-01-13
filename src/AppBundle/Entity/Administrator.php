@@ -10,7 +10,11 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Администратор.
  * 
  * @ORM\Entity
- * @ORM\Table(name="administrators")
+ * @ORM\Table(name="administrators",
+ *      indexes={
+ *          @ORM\Index(name="administrators_fullname_idx", columns={"fullname"})
+ *      }
+ * )
  */
 class Administrator {
 

@@ -10,7 +10,12 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Задача.
  * 
  * @ORM\Entity
- * @ORM\Table(name="tasks")
+ * @ORM\Table(name="tasks",
+ *      indexes={
+ *          @ORM\Index(name="tasks_name_idx", columns={"name"}),
+ *          @ORM\Index(name="tasks_status_idx", columns={"status"})
+ *      }
+ * )
  */
 class Task {
 
