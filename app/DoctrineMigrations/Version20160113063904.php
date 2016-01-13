@@ -19,12 +19,10 @@ class Version20160113063904 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('CREATE INDEX documents_filename_idx ON documents (filename)');
-        $this->addSql('ALTER TABLE clients CHANGE status `status` ENUM(\'Действующий\', \'Потенциальный\', \'Прошлый\')');
         $this->addSql('CREATE INDEX clients_fullname_idx ON clients (fullname)');
         $this->addSql('CREATE INDEX clients_email_idx ON clients (email)');
         $this->addSql('CREATE INDEX clients_phone_idx ON clients (phone)');
         $this->addSql('CREATE INDEX clients_status_idx ON clients (status)');
-        $this->addSql('ALTER TABLE tasks CHANGE status `status` ENUM(\'Новая\', \'В работе\', \'Закрыта\')');
         $this->addSql('CREATE INDEX tasks_name_idx ON tasks (name)');
         $this->addSql('CREATE INDEX tasks_status_idx ON tasks (status)');
         $this->addSql('CREATE INDEX administrators_fullname_idx ON administrators (fullname)');
@@ -43,10 +41,8 @@ class Version20160113063904 extends AbstractMigration
         $this->addSql('DROP INDEX clients_email_idx ON clients');
         $this->addSql('DROP INDEX clients_phone_idx ON clients');
         $this->addSql('DROP INDEX clients_status_idx ON clients');
-        $this->addSql('ALTER TABLE clients CHANGE status status VARCHAR(255) DEFAULT NULL COLLATE utf8_unicode_ci');
         $this->addSql('DROP INDEX documents_filename_idx ON documents');
         $this->addSql('DROP INDEX tasks_name_idx ON tasks');
         $this->addSql('DROP INDEX tasks_status_idx ON tasks');
-        $this->addSql('ALTER TABLE tasks CHANGE status status VARCHAR(255) DEFAULT NULL COLLATE utf8_unicode_ci');
     }
 }
