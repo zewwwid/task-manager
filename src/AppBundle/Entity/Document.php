@@ -3,8 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\Common\Collections\ArrayCollection;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Документ.
@@ -26,6 +25,8 @@ class Document {
      * @ORM\Id
      * @ORM\Column(name="`id`", type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * 
+     * @Serializer\Groups({"card"})
      */
     protected $id;
 
@@ -35,6 +36,8 @@ class Document {
      * @ORM\Column(name="`filename`", type="string", length=255, 
      *      nullable=false
      * )
+     * 
+     * @Serializer\Groups({"card"})
      */
     protected $filename;   
 

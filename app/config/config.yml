@@ -73,3 +73,18 @@ doctrine_migrations:
     namespace: Application\Migrations
     table_name: migration_versions
     name: Application Migrations
+    
+fos_rest:
+    param_fetcher_listener: true
+    body_listener: true           
+    format_listener: true
+    view:
+#        mime_types:
+#            json: ['application/json; charset=UTF-8', 'application/json']
+        view_response_listener: 'force'
+        formats:
+            xml: true
+            json : true
+        failed_validation: HTTP_BAD_REQUEST
+
+nelmio_api_doc: ~

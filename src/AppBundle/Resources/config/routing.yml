@@ -1,3 +1,20 @@
 app_homepage:
     pattern:  /
     defaults: { _controller: AppBundle:Main:index }
+
+# Список клиентов с постраничной навигацией.    
+app_clients_list:
+    pattern:  /clients/{page}/{count}
+    defaults: { _controller: AppBundle:Client:list, _format: json }
+    requirements:
+        _method: GET
+        page: "\d+"
+        count: "\d+"
+
+# Карточка клиента со списком прикрепленных к клиенту документов.
+app_client_card:
+    pattern:  /clients/{id}
+    defaults: { _controller: AppBundle:Client:card, _format: json }
+    requirements:
+        _method: GET
+        id: "\d+"

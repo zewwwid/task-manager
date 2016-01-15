@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 
+use JMS\Serializer\Annotation as Serializer;
+
 /**
  * Клиент.
  * 
@@ -29,6 +31,8 @@ class Client {
      * @ORM\Id
      * @ORM\Column(name="`id`", type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * 
+     * @Serializer\Groups({"list", "card"})
      */
     protected $id;
 
@@ -38,6 +42,8 @@ class Client {
      * @ORM\Column(name="`fullname`", type="string", length=255, 
      *      nullable=false
      * )
+     * 
+     * @Serializer\Groups({"list", "card"})
      */
     protected $fullname;
 
@@ -45,6 +51,8 @@ class Client {
      * Email.
      *
      * @ORM\Column(name="`email`", type="string", length=64, nullable=false)
+     * 
+     * @Serializer\Groups({"list", "card"})
      */
     protected $email;
 
@@ -52,6 +60,8 @@ class Client {
      * Телефон.
      *
      * @ORM\Column(name="`phone`", type="string", length=20, nullable=true)
+     * 
+     * @!Serializer\Groups({"list", "card"})
      */
     protected $phone;
     
@@ -62,6 +72,8 @@ class Client {
      *      columnDefinition="ENUM('Действующий', 'Потенциальный', 'Прошлый')", 
      *      nullable=false
      * )
+     * 
+     * @Serializer\Groups({"list", "card"})
      */
     protected $status;
 
@@ -73,6 +85,8 @@ class Client {
      * Документы прикрепленные к клиенту.
      * 
      * @ORM\OneToMany(targetEntity="Document", mappedBy="client")
+     * 
+     * @Serializer\Groups({"card"})
      **/
     protected $documents;
     
