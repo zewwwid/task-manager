@@ -2,19 +2,68 @@ app_homepage:
     pattern:  /
     defaults: { _controller: AppBundle:Main:index }
 
+# Clients
+
+# Добавление нового клиента
+app_client_add:
+    pattern:  /clients/add.{_format}
+    defaults: { _controller: AppBundle:Client:add, _format: json }
+    requirements:
+        _method: POST
+        _format: json|xml
+
+# Изменение данных в карточке клиента       
+app_client_edit:
+    pattern:  /clients/edit/{id}.{_format}
+    defaults: { _controller: AppBundle:Client:edit, _format: json }
+    requirements:
+        _method: PATCH
+        id: "\d+"
+        _format:  json|xml
+        
+# Карточка клиента со списком прикрепленных к клиенту документов.
+app_client_get:
+    pattern:  /clients/get/{id}.{_format}
+    defaults: { _controller: AppBundle:Client:get, _format: json }
+    requirements:
+        _method: GET
+        id: "\d+"
+        _format:  json|xml
+        
 # Список клиентов с постраничной навигацией.    
 app_clients_list:
-    pattern:  /clients/{page}/{count}
+    pattern:  /clients/list/{page}/{count}.{_format}
     defaults: { _controller: AppBundle:Client:list, _format: json }
     requirements:
         _method: GET
         page: "\d+"
         count: "\d+"
+        _format:  json|xml
+        
+# Documents
 
-# Карточка клиента со списком прикрепленных к клиенту документов.
-app_client_card:
-    pattern:  /clients/{id}
-    defaults: { _controller: AppBundle:Client:card, _format: json }
+# Добавление нового документа к карточке клиента
+app_document_add_to_client:
+    pattern:  /documents/addToClient.{_format}
+    defaults: { _controller: AppBundle:Document:addToClient, _format: json }
+    requirements:
+        _method: POST
+        _format:  json|xml
+        
+# Открепление документа от карточки клиента
+app_document_detach_from_client:
+    pattern:  /documents/detachFromClient/{id}.{_format}
+    defaults: { _controller: AppBundle:Document:detachFromClient, _format: json }
+    requirements:
+        _method: PATCH
+        id: "\d+"
+        _format:  json|xml        
+
+# Получение документа
+app_document_get:
+    pattern:  /documents/get/{id}.{_format}
+    defaults: { _controller: AppBundle:Document:get, _format: json }
     requirements:
         _method: GET
         id: "\d+"
+        _format:  json|xml

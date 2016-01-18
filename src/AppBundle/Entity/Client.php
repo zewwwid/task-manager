@@ -2,11 +2,11 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\Common\Collections\ArrayCollection;
-
 use JMS\Serializer\Annotation as Serializer;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Клиент.
@@ -20,6 +20,12 @@ use JMS\Serializer\Annotation as Serializer;
  *          @ORM\Index(name="clients_status_idx", columns={"status"})
  *      }
  * )
+ * 
+ * @UniqueEntity(fields = "email", 
+ *      message = "Клиент с таким Email уже существует"
+ * )
+ * 
+ * @Serializer\XmlRoot("client")
  */
 class Client {
 
@@ -31,7 +37,7 @@ class Client {
      * @ORM\Id
      * @ORM\Column(name="`id`", type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
-     * 
+     *  
      * @Serializer\Groups({"list", "card"})
      */
     protected $id;
@@ -43,6 +49,11 @@ class Client {
      *      nullable=false
      * )
      * 
+     * @Assert\NotBlank(message = "ФИО не может быть пустым")
+     * @Assert\Length(max = 255, 
+     *      maxMessage = "Максимальная длина ФИО 255 символов"
+     * )
+     * 
      * @Serializer\Groups({"list", "card"})
      */
     protected $fullname;
@@ -51,6 +62,12 @@ class Client {
      * Email.
      *
      * @ORM\Column(name="`email`", type="string", length=64, nullable=false)
+     * 
+     * @Assert\NotBlank(message = "Email не может быть пустым")
+     * @Assert\Email(message = "Email '{{ value }}' не валидный.")
+     * @Assert\Length(max = 64, 
+     *      maxMessage = "Максимальная длина Email 64 символоа"
+     * )
      * 
      * @Serializer\Groups({"list", "card"})
      */
@@ -61,7 +78,11 @@ class Client {
      *
      * @ORM\Column(name="`phone`", type="string", length=20, nullable=true)
      * 
-     * @!Serializer\Groups({"list", "card"})
+     * @Assert\Length(max = 20, 
+     *      maxMessage = "Максимальная длина Телефона 20 символов"
+     * )
+     * 
+     * @Serializer\Groups({"list", "card"})
      */
     protected $phone;
     
@@ -73,13 +94,14 @@ class Client {
      *      nullable=false
      * )
      * 
+     * @Assert\NotBlank(message = "Статус не может быть пустым")
+     * @Assert\Choice(choices = {1, 2, 3},
+     *      message = "Неверный статус. Допустимые статусы {1 : Действующий, 2 : Потенциальный, 3 : Прошлый}"
+     * )
+     * 
      * @Serializer\Groups({"list", "card"})
      */
     protected $status;
-
-    #</editor-fold>
-    
-    #<editor-fold defaultstate="collapsed" desc="Связи">
     
     /**
      * Документы прикрепленные к клиенту.
@@ -87,11 +109,12 @@ class Client {
      * @ORM\OneToMany(targetEntity="Document", mappedBy="client")
      * 
      * @Serializer\Groups({"card"})
+     * @Serializer\XmlList(inline = false, entry = "document")
      **/
     protected $documents;
-    
-    #</editor-fold>
 
+    #</editor-fold>
+    
     #<editor-fold defaultstate="collapsed" desc="Методы">
     
     /**

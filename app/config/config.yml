@@ -35,6 +35,9 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    # Определяем контроллер исключения по умолчанию.
+    # Необходим для сериализации всех исключений.
+    exception_controller:  AppBundle:Exception:showException
 
 # Doctrine Configuration
 doctrine:
@@ -75,16 +78,26 @@ doctrine_migrations:
     name: Application Migrations
     
 fos_rest:
+    exception: 
+        enabled: true
+        exception_controller: "AppBundle\Controller\ExceptionController::showExceptionAction"
+    serializer:
+        serialize_null: true
+    routing_loader:
+        default_format: json
+        include_format: true
     param_fetcher_listener: true
-    body_listener: true           
+    body_listener: true
     format_listener: true
     view:
-#        mime_types:
-#            json: ['application/json; charset=UTF-8', 'application/json']
         view_response_listener: 'force'
+        exception_wrapper_handler: AppBundle\Handler\ExceptionWrapperHandler
         formats:
+            json: true
             xml: true
-            json : true
-        failed_validation: HTTP_BAD_REQUEST
-
-nelmio_api_doc: ~
+        
+nelmio_api_doc: 
+    sandbox:
+        request_format:
+            formats:
+            method: accept_header

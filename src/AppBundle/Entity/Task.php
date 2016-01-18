@@ -2,9 +2,9 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Задача.
@@ -53,10 +53,6 @@ class Task {
      * )
      */
     protected $status;
-
-    #</editor-fold>
-    
-    #<editor-fold defaultstate="collapsed" desc="Связи">
     
     /**
      * Ответственный.
@@ -72,9 +68,9 @@ class Task {
      * @ORM\OneToMany(targetEntity="Document", mappedBy="task")
      **/
     protected $documents;
-    
-    #</editor-fold>
 
+    #</editor-fold>
+    
     #<editor-fold defaultstate="collapsed" desc="Методы">
     
     /**
