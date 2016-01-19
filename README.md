@@ -148,4 +148,4 @@ $ service apache2 reload
 
 Demo
 ----
-Демо версия развернута здесь: http://task-manager.zewwwid.com/api/doc
+Демо версия развернута здесь: http://task-manager.zewwwid.com/
