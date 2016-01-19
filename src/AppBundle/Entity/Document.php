@@ -10,11 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Документ.
  * 
  * @ORM\Entity
- * @ORM\Table(name="documents",
- *      indexes={
- *          @ORM\Index(name="documents_filename_idx", columns={"filename"})
- *      }
- * )
+ * @ORM\Table(name="documents")
  * @ORM\HasLifecycleCallbacks
  * 
  * @Serializer\XmlRoot("document")

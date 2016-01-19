@@ -15,9 +15,11 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="clients",
  *      indexes={
  *          @ORM\Index(name="clients_fullname_idx", columns={"fullname"}),
- *          @ORM\Index(name="clients_email_idx", columns={"email"}),
  *          @ORM\Index(name="clients_phone_idx", columns={"phone"}),
  *          @ORM\Index(name="clients_status_idx", columns={"status"})
+ *      },
+ *      uniqueConstraints={
+ *          @ORM\UniqueConstraint(name="clients_email_idx", columns={"email"})
  *      }
  * )
  * 

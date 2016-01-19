@@ -10,12 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Задача.
  * 
  * @ORM\Entity
- * @ORM\Table(name="tasks",
- *      indexes={
- *          @ORM\Index(name="tasks_name_idx", columns={"name"}),
- *          @ORM\Index(name="tasks_status_idx", columns={"status"})
- *      }
- * )
+ * @ORM\Table(name="tasks")
  */
 class Task {
 
